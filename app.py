@@ -1227,16 +1227,28 @@ def main():
     st.sidebar.metric("pH Level", f"{data['ph_level']:.1f}")
     st.sidebar.metric("Bacterial OD600", f"{data['bacterial_od']:.3f}")
 
-    if experiment_type == "Background Introduction":
-        show_background()
-    elif experiment_type == "Basic Laboratory Procedures":
-        show_basic_experiments()
-    elif experiment_type == "Engineered Bacteria Construction":
-        show_engineering_bacteria()
-    elif experiment_type == "CRISPR-Cas9 Gene Integration":
-        show_crispr_cas9()
+    if is_kids_mode():
+        if experiment_type == "Story Time":
+            show_background()
+        elif experiment_type == "Lab Steps":
+            show_basic_experiments()
+        elif experiment_type == "Bacteria Building":
+            show_engineering_bacteria()
+        elif experiment_type == "DNA Scissors":
+            show_crispr_cas9()
+        else:  # "Results Show"
+            show_results_analysis()
     else:
-        show_results_analysis()
+        if experiment_type == "Background Introduction":
+            show_background()
+        elif experiment_type == "Basic Laboratory Procedures":
+            show_basic_experiments()
+        elif experiment_type == "Engineered Bacteria Construction":
+            show_engineering_bacteria()
+        elif experiment_type == "CRISPR-Cas9 Gene Integration":
+            show_crispr_cas9()
+        else:
+            show_results_analysis()
 
     # 娣诲姞JavaScript鏉ュ姩鎬佽缃簲鐢ㄦā寮忓睘鎬э紝鐢ㄤ簬CSS鏍峰紡鍒囨崲
     st.markdown("""
